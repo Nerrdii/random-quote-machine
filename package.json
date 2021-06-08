@@ -2,7 +2,7 @@
   "name": "random-quote-machine",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://mrwhitenerdy.github.io/random-quote-machine",
+  "homepage": "https://nerrdii.github.io/random-quote-machine",
   "dependencies": {
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
