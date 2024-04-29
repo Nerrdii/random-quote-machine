@@ -4,7 +4,7 @@
   "private": true,
   "homepage": "https://nerrdii.github.io/random-quote-machine",
   "dependencies": {
-    "axios": "^0.21.2",
+    "axios": "^0.28.0",
     "bootstrap": "^4.6.0",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
