@@ -11,9 +11,10 @@ function Quote({ quote, author, onNewQuote }) {
           {author}
         </h6>
         <button
-          className="btn btn-primary mt-5"
+          className="btn btn-primary mt-5 me-2"
           id="new-quote"
-          onClick={onNewQuote}>
+          onClick={onNewQuote}
+        >
           New Quote
         </button>
         <a
@@ -21,7 +22,8 @@ function Quote({ quote, author, onNewQuote }) {
           target="_blank"
           rel="noopener noreferrer"
           className="btn btn-primary mt-5 float-right"
-          id="tweet-quote">
+          id="tweet-quote"
+        >
           <i className="fa fa-twitter" />
         </a>
       </div>

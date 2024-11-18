@@ -1,48 +1,42 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './App.css';
 import Quote from './Quote';
 
-class App extends Component {
-  state = {
-    quote: '',
-    author: ''
-  };
+export default function App() {
+  const [quotes, setQuotes] = useState([]);
+  const [author, setAuthor] = useState('');
+  const [quote, setQuote] = useState('');
 
-  componentDidMount() {
-    this.getQuote();
+  useEffect(() => {
+    axios
+      .get(
+        'https://gist.githubusercontent.com/camperbot/5a022b72e96c4c9585c32bf6a75f62d9/raw/e3c6895ce42069f0ee7e991229064f167fe8ccdc/quotes.json'
+      )
+      .then((res) => {
+        setQuotes(res.data.quotes);
+        setQuote(res.data.quotes[0].quote);
+        setAuthor(res.data.quotes[0].author);
+      });
+  }, []);
+
+  function getNewQuote() {
+    const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+    setQuote(randomQuote.quote);
+    setAuthor(randomQuote.author);
   }
 
-  async getQuote() {
-    const res = await axios.get(
-      'https://andruxnet-random-famous-quotes.p.mashape.com/',
-      {
-        headers: {
-          'X-Mashape-Key': 'i65mrE13AImsh8UDnk5rBJz8uwk5p1Fn3mKjsnpR4Q9Z4217E4',
-          'Content-Type': 'application/x-www-form-urlencoded',
-          Accept: 'application/json'
-        }
-      }
-    );
-
-    this.setState({ quote: res.data[0].quote, author: res.data[0].author });
-  }
-
-  render() {
-    return (
-      <div className="container mt-5">
-        <div className="row">
-          <div className="col-md-6 offset-md-3">
-            <Quote
-              quote={this.state.quote}
-              author={this.state.author}
-              onNewQuote={this.getQuote.bind(this)}
-            />
-          </div>
+  return (
+    <div className="container mt-5">
+      <div className="row">
+        <div className="col-md-6 offset-md-3">
+          <Quote
+            quote={quote}
+            author={author}
+            onNewQuote={() => getNewQuote()}
+          />
         </div>
       </div>
-    );
-  }
+    </div>
+  );
 }
-
-export default App;
